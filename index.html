@@ -7,1401 +7,615 @@ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>DEMAN SRICKER SARVIVER</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  margin: 0;
-  overflow: hidden;
-  background: #080d17;
-  color: white;
-  font-family: Arial, sans-serif;
-  touch-action: none;
-}
-
-canvas {
-  display: block;
-}
-
-#hud {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-}
-
-.panel {
-  background: rgba(5, 12, 25, .88);
-  border: 1px solid #24d9ff;
-  border-radius: 10px;
-  padding: 8px;
-  box-shadow: 0 0 12px #008cff30;
-}
-
-#top {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  right: 8px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  justify-content: space-between;
-  font-size: 12px;
-}
-
-#healthBar {
-  width: 105px;
-  height: 9px;
-  background: #522;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-#healthFill {
-  height: 100%;
-  width: 100%;
-  background: #31ee70;
-}
-
-#monsterBar {
-  width: 145px;
-  height: 9px;
-  background: #522;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-#monsterFill {
-  height: 100%;
-  width: 100%;
-  background: #168cff;
-}
-
-#controls {
-  position: absolute;
-  bottom: 14px;
-  left: 12px;
-  right: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-}
-
-#joystick {
-  width: 116px;
-  height: 116px;
-  border-radius: 50%;
-  background: #ffffff20;
-  border: 2px solid #ffffff80;
-  position: relative;
-  pointer-events: auto;
-  touch-action: none;
-}
-
-#stick {
-  position: absolute;
-  left: 31px;
-  top: 31px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #22caffc9;
-  border: 2px solid white;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 72px);
-  gap: 8px;
-  pointer-events: auto;
-}
-
-button {
-  color: white;
-  background: #123a5c;
-  border: 1px solid #42dfff;
-  border-radius: 10px;
-  padding: 12px 5px;
-  font-weight: bold;
-  font-size: 12px;
-  touch-action: manipulation;
-}
-
-button:active {
-  background: #087ea4;
-}
-
-#fire {
-  background: #a51f32;
-  border-color: #ff677c;
-}
-
-#upgradePanel {
-  position: absolute;
-  top: 105px;
-  right: 8px;
-  width: 158px;
-  pointer-events: auto;
-  font-size: 11px;
-}
-
-#upgradePanel button {
-  width: 100%;
-  margin-top: 5px;
-  padding: 8px 3px;
-}
-
-#message {
-  position: absolute;
-  top: 44%;
-  width: 100%;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 900;
-  color: #fff;
-  text-shadow: 0 0 15px #00bfff;
-  display: none;
-  pointer-events: auto;
-}
-
-#startScreen {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-  background:
-    radial-gradient(circle, #123b5d, #03060e 75%);
-}
-
-#startScreen h1 {
-  color: #3fe2ff;
-  font-size: clamp(26px, 7vw, 42px);
-  text-shadow: 0 0 20px #008cff;
-}
-
-#startScreen p {
-  max-width: 390px;
-  line-height: 1.6;
-}
-
-#startBtn {
-  font-size: 18px;
-  padding: 16px 30px;
-  background: #007bff;
-}
-
-#help {
-  position: absolute;
-  left: 8px;
-  top: 125px;
-  font-size: 10px;
-  max-width: 150px;
-  color: #c5edff;
-}
-
-@media (orientation: portrait) {
-  #rotate {
-    display: block;
-  }
-}
-
-#rotate {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  background: #06101c;
-  text-align: center;
-  padding-top: 40vh;
-  font-size: 22px;
-}
+*{box-sizing:border-box}
+body{margin:0;overflow:hidden;background:#101522;color:white;
+font-family:Arial,sans-serif;touch-action:none}
+canvas{display:block}
+#hud{position:fixed;top:8px;left:8px;z-index:5;
+background:#101522dd;padding:10px;border:1px solid #40eaff;
+border-radius:12px;font-size:13px;line-height:1.7}
+#health{color:#ff5656}
+#monsterHealth{color:#40eaff}
+#controls{position:fixed;inset:0;pointer-events:none;z-index:6}
+#stick{position:absolute;left:22px;bottom:25px;width:125px;height:125px;
+border-radius:50%;background:#ffffff20;border:2px solid #ffffff70;
+pointer-events:auto;touch-action:none}
+#knob{position:absolute;width:48px;height:48px;left:36px;top:36px;
+border-radius:50%;background:#45eaffaa;border:2px solid white}
+.btn{pointer-events:auto;position:absolute;border:2px solid #ffffff99;
+border-radius:50%;background:#152c49dd;color:white;font-weight:bold;
+width:65px;height:65px;touch-action:none}
+#fire{right:22px;bottom:35px;background:#c52d43dd}
+#heal{right:95px;bottom:105px}
+#upgrade{right:20px;bottom:180px;border-radius:12px;width:110px;height:45px}
+#door{right:20px;bottom:230px;border-radius:12px;width:110px;height:45px}
+#start{position:fixed;inset:0;z-index:20;background:#080d18ed;
+display:flex;align-items:center;justify-content:center;text-align:center}
+#start button{background:#00c9ff;color:#071321;font-size:20px;
+padding:15px 30px;border:0;border-radius:12px;font-weight:bold}
+#message{position:fixed;inset:0;display:none;z-index:30;
+background:#060b14ed;align-items:center;justify-content:center;
+text-align:center;font-size:30px;font-weight:bold;color:#53edff}
+#message button{padding:12px 25px;border:0;border-radius:10px;
+font-size:18px;margin-top:20px}
+#hint{position:fixed;bottom:5px;left:50%;transform:translateX(-50%);
+font-size:11px;color:#ddd;white-space:nowrap;pointer-events:none}
 </style>
 </head>
 
 <body>
 
-<div id="rotate">
-  📱 Phone ko landscape mein ghumao
-</div>
-
-<div id="startScreen">
-  <h1>DEMAN SRICKER<br>SARVIVER</h1>
-
-  <p>
-    SURVIVE FOR 5 MINUTES!<br>
-    10 Rooms • Computer Coins • Weapon Upgrades<br>
-    Blue Horror Monster • 3D Survival
-  </p>
-
-  <button id="startBtn">▶ START GAME</button>
-
-  <p style="font-size:11px">
-    Best experience: landscape mode
-  </p>
-</div>
-
 <div id="hud">
+<b>DEMAN SRICKER SARVIVER</b><br>
+🪙 Coins: <span id="coins">0</span><br>
+❤️ Player: <span id="health">100</span>/100<br>
+👾 Demon: <span id="monsterHealth">5000</span> HP<br>
+⏱️ Time: <span id="timer">05:00</span><br>
+🔫 Weapon Level: <span id="wl">1</span><br>
+💻 Computer Level: <span id="cl">1</span><br>
+👥 Survivors: <span id="survivors">6</span>
+</div>
 
-  <div id="top">
+<div id="controls">
+<div id="stick"><div id="knob"></div></div>
+<button class="btn" id="fire">FIRE</button>
+<button class="btn" id="heal">🛡️</button>
+<button class="btn" id="upgrade">💻 UPGRADE</button>
+<button class="btn" id="door">🚪 DOOR</button>
+<div id="hint">Joystick se move karo • Computer ke paas jaakar upgrade karo</div>
+</div>
 
-    <div class="panel">
-      ❤️ PLAYER
-      <div id="healthText">1000 / 1000</div>
-      <div id="healthBar">
-        <div id="healthFill"></div>
-      </div>
-    </div>
+<div id="start">
+<div>
+<h1 style="color:#42eaff">DEMAN SRICKER<br>SARVIVER</h1>
+<p>10 ROOMS • 6 SURVIVORS • BLUE DEMON</p>
+<p>Survive for 5 minutes!</p>
+<button id="startBtn">▶ START GAME</button>
+</div>
+</div>
 
-    <div class="panel">
-      🪙 COINS
-      <div id="coins">0</div>
-      <div id="income">Income: 10/s</div>
-    </div>
-
-    <div class="panel">
-      ⏱ SURVIVAL
-      <div id="timer">05:00</div>
-      <div>AI: <span id="alive">5</span> alive</div>
-    </div>
-
-    <div class="panel">
-      👹 BLUE HORROR
-      <div id="monsterText">5000 / 5000 HP</div>
-      <div id="monsterBar">
-        <div id="monsterFill"></div>
-      </div>
-      <div id="monsterLevel">LEVEL 1</div>
-    </div>
-
-  </div>
-
-  <div id="help">
-    Nearest computer ke paas jaakar COMPUTER dabao.
-    <br><br>
-    Upgrades ke liye coins collect karo.
-  </div>
-
-  <div id="upgradePanel" class="panel">
-    <b>🏠 ROOM UPGRADES</b>
-    <div id="roomText">Room: 1</div>
-    <div id="computerText">Computer Lvl 1</div>
-    <div id="weaponText">Weapon Lvl 1</div>
-    <div id="doorText">Door Lvl 1</div>
-
-    <button id="computerUpgrade">
-      💻 COMPUTER UPGRADE
-    </button>
-
-    <button id="weaponUpgrade">
-      🔫 WEAPON UPGRADE
-    </button>
-
-    <button id="doorUpgrade">
-      🚪 DOOR UPGRADE
-    </button>
-  </div>
-
-  <div id="controls">
-
-    <div id="joystick">
-      <div id="stick"></div>
-    </div>
-
-    <div class="buttons">
-      <button id="interact">💻 COMPUTER</button>
-      <button id="fire">🔫 FIRE</button>
-      <button id="medkit">❤️ MEDKIT</button>
-      <button id="run">🏃 RUN</button>
-    </div>
-
-  </div>
-
-  <div id="message"></div>
+<div id="message">
+<div id="result">
+YOU SURVIVED THE DEMON!
+<br><button onclick="location.reload()">PLAY AGAIN</button>
+</div>
 </div>
 
 <script type="module">
 import * as THREE from
 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
-/* ==========================================
-   DEMAN SRICKER SARVIVER
-   Single-file 3D survival prototype
-========================================== */
-
-const $ = id => document.getElementById(id);
-
-let started = false;
-let ended = false;
-
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x8ab5d2);
-scene.fog = new THREE.Fog(0x8ab5d2, 45, 110);
+scene.background = new THREE.Color(0x111827);
+scene.fog = new THREE.Fog(0x111827,45,100);
 
 const camera = new THREE.PerspectiveCamera(
-  65, innerWidth / innerHeight, 0.1, 180
+48,innerWidth/innerHeight,0.1,200
 );
 
-const renderer = new THREE.WebGLRenderer({
-  antialias: false,
-  powerPreference: "low-power"
-});
-
-renderer.setPixelRatio(Math.min(devicePixelRatio, 1.35));
-renderer.setSize(innerWidth, innerHeight);
-renderer.shadowMap.enabled = false;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0x43536b, 2));
+scene.add(new THREE.HemisphereLight(0xc9eaff,0x30303b,2));
 
-const sun = new THREE.DirectionalLight(0xffffff, 2);
-sun.position.set(10, 25, 10);
-scene.add(sun);
+const light = new THREE.DirectionalLight(0xffffff,2.5);
+light.position.set(-15,30,15);
+light.castShadow=true;
+scene.add(light);
 
-const mat = (color, roughness=1) =>
-  new THREE.MeshStandardMaterial({ color, roughness });
+const mat=(color,roughness=0.8)=>new THREE.MeshStandardMaterial({
+color,roughness
+});
 
-const floorMat = mat(0x626b72);
-const wallMat = mat(0x9ba9b6);
-const darkMat = mat(0x202a36);
-const blueMat = mat(0x086cff);
-const skinMat = mat(0xffc49b);
-const greenMat = mat(0x26c76d);
-const redMat = mat(0xff3333);
-const goldMat = mat(0xffc928);
+const floorMat=mat(0x343e50);
+const wallMat=mat(0x64758a);
+const trimMat=mat(0x1cd9f5);
+const computerMat=mat(0x192b40);
+const screenMat=new THREE.MeshStandardMaterial({
+color:0x14eaff,emissive:0x087f9b,emissiveIntensity:2
+});
 
-const boxGeo = new THREE.BoxGeometry(1,1,1);
-const sphereGeo = new THREE.SphereGeometry(1,10,8);
-const cylGeo = new THREE.CylinderGeometry(.22,.28,.7,8);
+const boxGeo=new THREE.BoxGeometry(1,1,1);
 
-function box(parent, x,y,z, sx,sy,sz, material) {
-  const m = new THREE.Mesh(boxGeo, material);
-  m.position.set(x,y,z);
-  m.scale.set(sx,sy,sz);
-  parent.add(m);
-  return m;
+function box(x,y,z,w,h,d,material,parent=scene){
+const m=new THREE.Mesh(boxGeo,material);
+m.position.set(x,y,z);
+m.scale.set(w,h,d);
+m.castShadow=true;
+m.receiveShadow=true;
+parent.add(m);
+return m;
 }
 
-/* ---------- MAP ---------- */
+const ground=box(0,-0.55,0,75,1,43,floorMat);
+ground.receiveShadow=true;
 
-const ground = box(scene,0,-.35,0,64,.6,52,floorMat);
-
-const grid = new THREE.GridHelper(64,32,0x3b6c85,0x526875);
-grid.position.y = -.03;
+// Floor grid
+const grid=new THREE.GridHelper(75,38,0x1d91a8,0x4a586b);
+grid.position.y=-0.035;
 scene.add(grid);
 
-const rooms = [];
-const roomPositions = [];
+// Central corridor
+box(0,0.02,0,72,0.1,5,mat(0x566274));
 
-for (let row=0; row<2; row++) {
-  for (let col=0; col<5; col++) {
-    const x = (col-2)*11;
-    const z = (row-.5)*18;
+// 10 rooms: five on each side
+const rooms=[];
+const xs=[-28,-14,0,14,28];
 
-    roomPositions.push({x,z});
-  }
-}
-
-function createRoom(index, x,z) {
-  const group = new THREE.Group();
-  group.position.set(x,0,z);
-  scene.add(group);
-
-  const roomFloor = box(
-    group,0,.02,0,9,.15,8,floorMat
-  );
-
-  // Back and side walls
-  box(group,0,1.35,-4,9,2.7,.25,wallMat);
-  box(group,-4.5,1.35,0,.25,2.7,8,wallMat);
-  box(group,4.5,1.35,0,.25,2.7,8,wallMat);
-
-  // Front wall split into two sections for an entrance
-  box(group,-2.9,1.35,4,3.2,2.7,.25,wallMat);
-  box(group,2.9,1.35,4,3.2,2.7,.25,wallMat);
-
-  // Roof markers
-  box(group,0,2.8,0,9.1,.12,8.1,darkMat);
-
-  // Door
-  const door = box(
-    group,0,1.05,4,2.4,2.1,.3,blueMat
-  );
-
-  // Computer desk
-  box(group,0,.55,-1.9,2.2,.8,1.0,darkMat);
-
-  const computer = new THREE.Group();
-  computer.position.set(0,1.25,-2.0);
-  group.add(computer);
-
-  box(computer,0,.35,0,1.2,.75,.15,blueMat);
-  box(computer,0,.35,.09,1.0,.52,.03,mat(0x3cffff));
-  box(computer,0,-.12,0,.15,.2,.15,darkMat);
-
-  // Room number
-  const light = new THREE.PointLight(0x2bdcff, 2, 5);
-  light.position.set(0,2.1,0);
-  group.add(light);
-
-  const room = {
-    index:index+1,
-    group,
-    x,z,
-    door,
-    computer,
-    computerLevel:1,
-    weaponLevel:1,
-    doorLevel:1,
-    income:1,
-    damage:25,
-    range:5,
-    doorCost:25,
-    computerCost:20,
-    weaponCost:25
-  };
-
-  rooms.push(room);
-}
-
-roomPositions.forEach((p,i) => {
-  createRoom(i,p.x,p.z);
-});
-
-/* ---------- CHARACTERS ---------- */
-
-function makeCharacter(color, isPlayer=false) {
-  const group = new THREE.Group();
-
-  const bodyMat = mat(color);
-
-  const body = new THREE.Mesh(
-    new THREE.CapsuleGeometry(.38,.65,3,6),
-    bodyMat
-  );
-  body.position.y = 1.0;
-  group.add(body);
-
-  const head = new THREE.Mesh(sphereGeo,skinMat);
-  head.position.y = 1.85;
-  head.scale.set(.32,.35,.32);
-  group.add(head);
-
-  const armL = box(
-    group,-.48,1.1,0,.18,.65,.2,bodyMat
-  );
-
-  const armR = box(
-    group,.48,1.1,0,.18,.65,.2,bodyMat
-  );
-
-  const legL = box(
-    group,-.18,.38,0,.2,.65,.25,darkMat
-  );
-
-  const legR = box(
-    group,.18,.38,0,.2,.65,.25,darkMat
-  );
-
-  if (isPlayer) {
-    const gun = box(
-      group,.48,1.22,-.42,.18,.18,.85,darkMat
-    );
-  }
-
-  group.userData.parts = {body,head,armL,armR,legL,legR};
-  scene.add(group);
-  return group;
-}
-
-const player = {
-  group:makeCharacter(0x22b8ff,true),
-  hp:1000,
-  maxHp:1000,
-  speed:5,
-  weaponLevel:1,
-  range:5,
-  damage:25,
-  fireTimer:0,
-  alive:true,
-  medkits:3
-};
-
-player.group.position.set(-22,0,0);
-
-const bots = [];
-
-const botColors = [
-  0xffbd45,
-  0x37d879,
-  0xe56bff,
-  0xff6b53,
-  0xe8edff
-];
-
-for (let i=0;i<5;i++) {
-  const bot = {
-    group:makeCharacter(botColors[i]),
-    hp:500,
-    maxHp:500,
-    alive:true,
-    fireTimer:Math.random(),
-    speed:2.0 + Math.random()*.5
-  };
-
-  const p = roomPositions[i*2];
-
-  bot.group.position.set(
-    p.x + (Math.random()-.5)*2,
-    0,
-    p.z + (Math.random()-.5)*2
-  );
-
-  bots.push(bot);
-}
-
-/* ---------- BLUE HORROR MONSTER ---------- */
-
-function createMonster() {
-  const g = new THREE.Group();
-
-  const fur = mat(0x0788e8);
-  const belly = mat(0x25baff);
-  const black = mat(0x080b18);
-  const teeth = mat(0xffffff);
-
-  const torso = new THREE.Mesh(
-    new THREE.CapsuleGeometry(.8,1.5,4,8),fur
-  );
-  torso.position.y=2.0;
-  g.add(torso);
-
-  const head = new THREE.Mesh(
-    sphereGeo,fur
-  );
-  head.scale.set(.8,.85,.65);
-  head.position.y=3.45;
-  g.add(head);
-
-  const stomach = new THREE.Mesh(
-    sphereGeo,belly
-  );
-  stomach.scale.set(.52,.8,.25);
-  stomach.position.set(0,1.9,.65);
-  g.add(stomach);
-
-  // Long arms
-  const arm1=box(g,-1.05,1.9,0,.35,2.1,.35,fur);
-  const arm2=box(g,1.05,1.9,0,.35,2.1,.35,fur);
-
-  arm1.rotation.z=-.16;
-  arm2.rotation.z=.16;
-
-  box(g,-.4,.5,0,.35,1,.4,fur);
-  box(g,.4,.5,0,.35,1,.4,fur);
-
-  // Eyes
-  const eye1=new THREE.Mesh(sphereGeo,mat(0xffffff));
-  eye1.position.set(-.3,3.55,.58);
-  eye1.scale.set(.17,.2,.1);
-  g.add(eye1);
-
-  const eye2=eye1.clone();
-  eye2.position.x=.3;
-  g.add(eye2);
-
-  const pupil1=new THREE.Mesh(sphereGeo,black);
-  pupil1.position.set(-.3,3.55,.68);
-  pupil1.scale.set(.07,.1,.05);
-  g.add(pupil1);
-
-  const pupil2=pupil1.clone();
-  pupil2.position.x=.3;
-  g.add(pupil2);
-
-  // Monster mouth
-  const mouth=box(g,0,3.05,.63,.85,.28,.12,black);
-
-  for(let i=0;i<5;i++) {
-    box(
-      g,-.32+i*.16,3.13,.72,
-      .08,.14,.08,teeth
-    );
-  }
-
+for(let row=0;row<2;row++){
+ for(let col=0;col<5;col++){
+  const x=xs[col];
+  const z=row===0?-10:10;
+  const g=new THREE.Group();
   scene.add(g);
 
-  return {
-    group:g,
-    hp:5000,
-    maxHp:5000,
-    level:1,
-    damage:35,
-    speed:1.7,
-    attackTimer:0,
-    alive:true,
-    hitFlash:0
-  };
+  box(x,0.03,z,12,0.12,11,mat(0x465366),g);
+
+  // Back wall
+  box(x,1.7,z+(row===0?-5.5:5.5),12,3.4,0.5,wallMat,g);
+
+  // Side walls
+  box(x-6,1.7,z,0.5,3.4,11,wallMat,g);
+  box(x+6,1.7,z,0.5,3.4,11,wallMat,g);
+
+  // Entrance walls leave a door opening
+  box(x-4,1.7,z+(row===0?5.5:-5.5),4,3.4,0.5,wallMat,g);
+  box(x+4,1.7,z+(row===0?5.5:-5.5),4,3.4,0.5,wallMat,g);
+
+  // Neon trim
+  box(x,3.45,z,11.5,0.12,0.12,trimMat,g);
+
+  // Computer desk
+  box(x,0.7,z-1,2.4,0.8,1.2,computerMat,g);
+  box(x,1.55,z-1.25,1.5,1,0.15,computerMat,g);
+  box(x,1.55,z-1.15,1.25,0.75,0.08,screenMat,g);
+
+  // Computer indicator
+  box(x,1.05,z-0.35,0.18,0.08,0.18,trimMat,g);
+
+  // Door
+  const door=box(x,1.4,z+(row===0?5.1:-5.1),2.8,2.8,0.25,
+  mat(0x9a354a),g);
+
+  rooms.push({
+  x,z,group:g,door,doorLevel:1,computerLevel:1,
+  computerPosition:new THREE.Vector3(x,0,z-1)
+  });
+ }
 }
 
-const monster=createMonster();
-monster.group.position.set(0,0,-21);
+// Main character
+function makeCharacter(color,isMonster=false){
+ const g=new THREE.Group();
+ const bodyMat=mat(color);
+ const darkMat=mat(0x172033);
+ const skinMat=mat(isMonster?0x17a9ff:0xffc49b);
 
-/* ---------- PROJECTILES ---------- */
+ // Legs
+ for(const side of [-1,1]){
+  const leg=box(side*0.22,0.45,0,0.23,0.75,0.28,darkMat,g);
+  leg.userData.leg=true;
+ }
 
+ // Body
+ box(0,1.15,0,0.85,0.9,0.48,bodyMat,g);
+
+ // Head
+ const head=new THREE.Mesh(
+ new THREE.SphereGeometry(isMonster?0.52:0.36,12,10),skinMat);
+ head.position.set(0,1.95,0);
+ head.castShadow=true;
+ g.add(head);
+
+ // Eyes
+ for(const side of [-1,1]){
+  const eye=box(side*0.16,2.02,0.32,0.12,0.13,0.08,
+  mat(isMonster?0xff2525:0xffffff),g);
+  if(isMonster){
+   eye.material.emissive.setHex(0xff0000);
+   eye.material.emissiveIntensity=1.5;
+  }
+ }
+
+ // Arms
+ for(const side of [-1,1]){
+  box(side*0.55,1.2,0,0.22,0.85,0.24,skinMat,g);
+ }
+
+ // Weapon
+ if(!isMonster){
+  box(0.47,1.05,0.42,0.18,0.18,0.85,mat(0x171b25),g);
+ }
+
+ scene.add(g);
+ g.position.y=0;
+ return g;
+}
+
+const player=makeCharacter(0x36b7ff);
+player.position.set(0,0,0);
+
+const allies=[];
+for(let i=0;i<5;i++){
+ const a=makeCharacter([0xffbb44,0x56dc83,0xd48cff,
+ 0xff785f,0xf2f2f2][i]);
+ a.position.set(-3+i*1.5,0,2);
+ allies.push({
+ mesh:a,hp:100,alive:true,
+ targetX:Math.random()*30-15,
+ targetZ:Math.random()*20-10,
+ cooldown:0
+ });
+}
+
+// Blue demon
+const demon=makeCharacter(0x087fff,true);
+demon.scale.set(1.55,1.55,1.55);
+demon.position.set(24,0,-12);
+
+// Demon health indicator
+const demonBar=box(0,3.6,0,3,0.15,0.15,mat(0xff2020));
+demonBar.visible=false;
+
+// Weapon bullets
 const bullets=[];
+const bulletMat=mat(0xffe866);
 
-function shoot(from, target, damage, color=0xffef72) {
-  if (!target || !target.alive) return;
+function shoot(from,target,damage,owner){
+ const b=new THREE.Mesh(
+ new THREE.SphereGeometry(0.12,8,8),bulletMat);
+ b.position.copy(from);
+ scene.add(b);
 
-  const start = from.group.position.clone();
-  start.y += 1.3;
-
-  const end = target.group.position.clone();
-  end.y += 1.3;
-
-  const dir = end.sub(start).normalize();
-
-  const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(.12,6,5),
-    mat(color)
-  );
-
-  mesh.position.copy(start);
-  scene.add(mesh);
-
-  bullets.push({
-    mesh,
-    dir,
-    damage,
-    target,
-    life:2.0
-  });
+ const dir=target.clone().sub(from).normalize();
+ bullets.push({mesh:b,dir,speed:owner==='enemy'?10:22,
+ damage,owner,life:2});
 }
 
-/* ---------- COINS AND UPGRADES ---------- */
-
+// Computer upgrade and income
 let coins=0;
-let gameTime=300;
-let elapsed=0;
-let selectedRoom=0;
-let monsterLevelTimer=0;
-let botRespawnTimer=0;
-
-function nearestRoom() {
-  let best=0;
-  let distance=Infinity;
-
-  rooms.forEach((r,i)=>{
-    const d=player.group.position.distanceTo(
-      new THREE.Vector3(r.x,0,r.z)
-    );
-
-    if(d<distance) {
-      distance=d;
-      best=i;
-    }
-  });
-
-  return best;
-}
-
-function roomDistance(r) {
-  return Math.hypot(
-    player.group.position.x-r.x,
-    player.group.position.z-r.z
-  );
-}
-
-function getRoom() {
-  return rooms[selectedRoom];
-}
-
-function upgradeComputer() {
-  const r=getRoom();
-
-  if(r.computerLevel>=5) {
-    showMessage("COMPUTER MAX LEVEL!");
-    return;
-  }
-
-  if(coins<r.computerCost) {
-    showMessage("NOT ENOUGH COINS!");
-    return;
-  }
-
-  coins-=r.computerCost;
-  r.computerLevel++;
-
-  r.income=Math.pow(2,r.computerLevel-1);
-
-  r.computerCost =
-    Math.ceil(r.computerCost*2);
-
-  r.computer.children[0].material=mat(
-    [0x3cffff,0x39ff8b,0xffd447,0xff8147,0xff3b6b][
-      r.computerLevel-1
-    ]
-  );
-
-  showMessage(
-    "COMPUTER LEVEL "+r.computerLevel
-  );
-
-  updateHUD();
-}
-
-function upgradeWeapon() {
-  const r=getRoom();
-
-  if(r.weaponLevel>=5) {
-    showMessage("WEAPON MAX LEVEL!");
-    return;
-  }
-
-  if(coins<r.weaponCost) {
-    showMessage("NOT ENOUGH COINS!");
-    return;
-  }
-
-  coins-=r.weaponCost;
-  r.weaponLevel++;
-
-  r.damage=[25,50,100,200,400][r.weaponLevel-1];
-  r.range=[5,8,10,14,17][r.weaponLevel-1];
-
-  player.damage=r.damage;
-  player.range=r.range;
-  player.weaponLevel=r.weaponLevel;
-
-  r.weaponCost=Math.ceil(r.weaponCost*2);
-
-  showMessage("WEAPON LEVEL "+r.weaponLevel);
-  updateHUD();
-}
-
-function upgradeDoor() {
-  const r=getRoom();
-
-  if(r.doorLevel>=5) {
-    showMessage("DOOR MAX LEVEL!");
-    return;
-  }
-
-  if(coins<r.doorCost) {
-    showMessage("NOT ENOUGH COINS!");
-    return;
-  }
-
-  coins-=r.doorCost;
-  r.doorLevel++;
-
-  r.doorCost=Math.ceil(r.doorCost*2);
-
-  r.door.material=mat(
-    [0x168cff,0x27d879,0xffca36,0xff7b36,0xff3155][
-      r.doorLevel-1
-    ]
-  );
-
-  showMessage("DOOR LEVEL "+r.doorLevel);
-  updateHUD();
-}
-
-function interactComputer() {
-  const r=rooms[nearestRoom()];
-  const d=roomDistance(r);
-
-  if(d>7) {
-    showMessage("COMPUTER KE PAAS JAO!");
-    return;
-  }
-
-  selectedRoom=r.index-1;
-
-  showMessage(
-    "ROOM "+r.index+" SELECTED"
-  );
-
-  updateHUD();
-}
-
-$("computerUpgrade").onclick=upgradeComputer;
-$("weaponUpgrade").onclick=upgradeWeapon;
-$("doorUpgrade").onclick=upgradeDoor;
-$("interact").onclick=interactComputer;
-
-/* ---------- MEDKIT ---------- */
-
-$("medkit").onclick=()=>{
-  if(player.medkits<=0) {
-    showMessage("NO MEDKITS LEFT!");
-    return;
-  }
-
-  if(player.hp>=player.maxHp) {
-    showMessage("HEALTH FULL!");
-    return;
-  }
-
-  player.medkits--;
-  player.hp=Math.min(
-    player.maxHp,player.hp+350
-  );
-
-  showMessage("HEALTH RESTORED!");
-  updateHUD();
-};
-
-/* ---------- JOYSTICK ---------- */
-
-const joystick=$("joystick");
-const stick=$("stick");
-
-let joyX=0;
-let joyY=0;
-let joyActive=false;
-let joyId=null;
-
-function resetJoy() {
-  joyX=0;
-  joyY=0;
-  joyActive=false;
-  joyId=null;
-  stick.style.left="31px";
-  stick.style.top="31px";
-}
-
-joystick.addEventListener("pointerdown",e=>{
-  joyActive=true;
-  joyId=e.pointerId;
-  joystick.setPointerCapture(e.pointerId);
-  moveJoy(e);
-});
-
-joystick.addEventListener("pointermove",e=>{
-  if(joyActive && e.pointerId===joyId) moveJoy(e);
-});
-
-joystick.addEventListener("pointerup",resetJoy);
-joystick.addEventListener("pointercancel",resetJoy);
-
-function moveJoy(e) {
-  const rect=joystick.getBoundingClientRect();
-
-  let dx=e.clientX-(rect.left+rect.width/2);
-  let dy=e.clientY-(rect.top+rect.height/2);
-
-  const max=34;
-  const len=Math.hypot(dx,dy);
-
-  if(len>max) {
-    dx=dx/len*max;
-    dy=dy/len*max;
-  }
-
-  joyX=dx/max;
-  joyY=dy/max;
-
-  stick.style.left=(31+dx)+"px";
-  stick.style.top=(31+dy)+"px";
-}
-
-/* ---------- KEYBOARD ---------- */
-
-const keys={};
-
-addEventListener("keydown",e=>{
-  keys[e.key.toLowerCase()]=true;
-
-  if(e.key==="e" || e.key==="E") {
-    interactComputer();
-  }
-});
-
-addEventListener("keyup",e=>{
-  keys[e.key.toLowerCase()]=false;
-});
-
+let computerLevel=1;
+let weaponLevel=1;
+let doorLevel=1;
+let playerHP=100;
+let shield=0;
+let timeLeft=300;
 let running=false;
-$("run").onclick=()=>running=!running;
+let ended=false;
+let elapsed=0;
+let fireHeld=false;
+let lastShot=0;
+let demonHP=5000;
+let demonMaxHP=5000;
+let demonAttack=0;
+let incomeTimer=0;
+let hitFlash=0;
 
-/* ---------- FIRE BUTTON ---------- */
+const joystick={x:0,z:0};
+const stick=document.getElementById('stick');
+const knob=document.getElementById('knob');
 
-let firing=false;
+function setJoystick(e){
+ const r=stick.getBoundingClientRect();
+ const cx=r.left+r.width/2;
+ const cy=r.top+r.height/2;
+ let dx=e.clientX-cx,dy=e.clientY-cy;
+ const max=43;
+ const len=Math.hypot(dx,dy);
+ if(len>max){dx=dx/len*max;dy=dy/len*max}
+ joystick.x=dx/max;
+ joystick.z=dy/max;
+ knob.style.left=(36+dx)+'px';
+ knob.style.top=(36+dy)+'px';
+}
 
-$("fire").addEventListener("pointerdown",e=>{
-  e.preventDefault();
-  firing=true;
+stick.addEventListener('pointerdown',e=>{
+ stick.setPointerCapture(e.pointerId);setJoystick(e);
+});
+stick.addEventListener('pointermove',e=>{
+ if(e.buttons)setJoystick(e);
+});
+function resetJoy(){
+ joystick.x=0;joystick.z=0;
+ knob.style.left='36px';knob.style.top='36px';
+}
+stick.addEventListener('pointerup',resetJoy);
+stick.addEventListener('pointercancel',resetJoy);
+
+document.getElementById('fire').addEventListener('pointerdown',()=>{
+ fireHeld=true;
+});
+['pointerup','pointercancel','pointerleave'].forEach(ev=>{
+ document.getElementById('fire').addEventListener(ev,()=>{
+ fireHeld=false;
+ });
 });
 
-function stopFire() {
-  firing=false;
+// Find nearest computer
+function nearestRoom(){
+ let best=null,dist=Infinity;
+ for(const r of rooms){
+  const d=player.position.distanceTo(r.computerPosition);
+  if(d<dist){dist=d;best=r}
+ }
+ return {room:best,dist};
 }
 
-$("fire").addEventListener("pointerup",stopFire);
-$("fire").addEventListener("pointercancel",stopFire);
-$("fire").addEventListener("pointerleave",stopFire);
+document.getElementById('upgrade').onclick=()=>{
+ if(!running)return;
+ const n=nearestRoom();
+ if(n.dist>6){
+  alert('Computer ke paas jao!');
+  return;
+ }
 
-/* ---------- ENEMY AI ---------- */
-
-function nearestTarget() {
-  const targets=[];
-
-  if(player.alive) targets.push(player);
-
-  bots.forEach(b=>{
-    if(b.alive) targets.push(b);
-  });
-
-  let best=null;
-  let dist=Infinity;
-
-  targets.forEach(t=>{
-    const d=monster.group.position.distanceTo(
-      t.group.position
-    );
-
-    if(d<dist) {
-      best=t;
-      dist=d;
-    }
-  });
-
-  return best;
-}
-
-function damageCharacter(target, amount) {
-  if(!target.alive) return;
-
-  target.hp-=amount;
-
-  if(target.hp<=0) {
-    target.hp=0;
-    target.alive=false;
-
-    if(target===player) {
-      showMessage("YOU DIED!");
-      finishGame(false);
-    } else {
-      target.group.visible=false;
-      showMessage("AI CHARACTER ELIMINATED!");
-    }
-  }
-}
-
-function damageMonster(amount) {
-  if(!monster.alive || ended) return;
-
-  monster.hp=Math.max(0,monster.hp-amount);
-
-  monster.hitFlash=.1;
-
-  if(monster.hp<=0) {
-    monster.alive=false;
-    monster.group.visible=false;
-    showMessage("MONSTER DEFEATED!");
-  }
-}
-
-/* ---------- HUD ---------- */
-
-function updateHUD() {
-  $("coins").textContent=Math.floor(coins);
-
-  const totalIncome=rooms.reduce(
-    (sum,r)=>sum+r.income,0
-  );
-
-  $("income").textContent="Income: "+totalIncome+"/s";
-
-  $("healthText").textContent=
-    Math.ceil(player.hp)+" / "+player.maxHp;
-
-  $("healthFill").style.width=
-    (player.hp/player.maxHp*100)+"%";
-
-  $("monsterText").textContent=
-    Math.ceil(monster.hp)+" / "+monster.maxHp+" HP";
-
-  $("monsterFill").style.width=
-    (monster.hp/monster.maxHp*100)+"%";
-
-  $("monsterLevel").textContent=
-    "LEVEL "+monster.level;
-
-  $("alive").textContent=
-    bots.filter(b=>b.alive).length;
-
-  const r=getRoom();
-
-  $("roomText").textContent="Room: "+r.index;
-  $("computerText").textContent=
-    "Computer Lvl "+r.computerLevel+
-    " | "+r.computerCost+" coins";
-
-  $("weaponText").textContent=
-    "Weapon Lvl "+r.weaponLevel+
-    " | "+r.weaponCost+" coins";
-
-  $("doorText").textContent=
-    "Door Lvl "+r.doorLevel+
-    " | "+r.doorCost+" coins";
-}
-
-let messageTimer=0;
-
-function showMessage(txt) {
-  const el=$("message");
-  el.textContent=txt;
-  el.style.display="block";
-  messageTimer=2.0;
-}
-
-/* ---------- GAME START ---------- */
-
-$("startBtn").onclick=()=>{
-  if(started) return;
-
-  started=true;
-  $("startScreen").style.display="none";
-
-  player.group.visible=true;
-
-  lastTime=performance.now();
+ const r=n.room;
+ const price=20*Math.pow(2,r.computerLevel-1);
+ if(r.computerLevel>=5){
+  alert('Computer MAX LEVEL!');
+  return;
+ }
+ if(coins<price){
+  alert('Coins kam hain! Required: '+price);
+  return;
+ }
+ coins-=price;
+ r.computerLevel++;
+ if(r===rooms[0])computerLevel=r.computerLevel;
+ alert('Computer Level '+r.computerLevel+'! Income doubled.');
 };
 
-/* ---------- MOVEMENT ---------- */
+document.getElementById('door').onclick=()=>{
+ if(!running)return;
+ const n=nearestRoom();
+ if(n.dist>7){
+  alert('Room ke computer/door ke paas jao!');
+  return;
+ }
+ const r=n.room;
+ const price=25*Math.pow(2,r.doorLevel-1);
+ if(r.doorLevel>=5){
+  alert('Door MAX LEVEL!');
+  return;
+ }
+ if(coins<price){
+  alert('Door upgrade ke liye '+price+' coins chahiye.');
+  return;
+ }
+ coins-=price;
+ r.doorLevel++;
+ r.door.material=mat([0x9a354a,0xe2b43c,0x48db8a,
+ 0x4ac9ff,0xffffff][r.doorLevel-1]);
+ r.door.scale.y+=0.1;
+ if(r===rooms[0])doorLevel=r.doorLevel;
+};
+
+document.getElementById('heal').onclick=()=>{
+ if(!running)return;
+ if(coins>=30 && playerHP<100){
+  coins-=30;playerHP=Math.min(100,playerHP+50);
+ }else if(coins>=20){
+  coins-=20;shield=10;
+ }else{
+  alert('30 coins chahiye!');
+ }
+};
+
+document.getElementById('startBtn').onclick=()=>{
+ document.getElementById('start').style.display='none';
+ running=true;
+};
+
+function nearestTarget(){
+ let target=player;
+ let dist=demon.position.distanceTo(player.position);
+ for(const a of allies){
+  if(!a.alive)continue;
+  const d=demon.position.distanceTo(a.mesh.position);
+  if(d<dist){dist=d;target=a.mesh}
+ }
+ return target;
+}
+
+function moveToward(obj,target,speed,dt){
+ const dx=target.x-obj.position.x;
+ const dz=target.z-obj.position.z;
+ const len=Math.hypot(dx,dz);
+ if(len>0.1){
+  obj.position.x+=dx/len*speed*dt;
+  obj.position.z+=dz/len*speed*dt;
+  obj.rotation.y=Math.atan2(dx,dz);
+ }
+}
+
+function endGame(won){
+ if(ended)return;
+ ended=true;running=false;
+ document.getElementById('message').style.display='flex';
+ document.getElementById('result').innerHTML=
+ (won?'🏆 YOU SURVIVED THE DEMON!':'💀 YOU WERE ELIMINATED!')+
+ '<br><button onclick="location.reload()">PLAY AGAIN</button>';
+}
 
 const clock=new THREE.Clock();
-let lastTime=performance.now();
-let hudTimer=0;
 
-function moveCharacter(character,dx,dz,dt) {
-  if(!character.alive) return;
+function update(dt){
+ if(!running||ended)return;
 
-  const len=Math.hypot(dx,dz);
+ elapsed+=dt;
+ timeLeft-=dt;
+ incomeTimer+=dt;
+ demonAttack+=dt;
+ lastShot+=dt;
 
-  if(len>.01) {
-    dx/=len;
-    dz/=len;
+ // Passive income from all computers
+ if(incomeTimer>=1){
+  const ticks=Math.floor(incomeTimer);
+  incomeTimer-=ticks;
+  let income=0;
+  for(const r of rooms){
+   income+=Math.pow(2,r.computerLevel-1);
+  }
+  coins+=income*ticks;
+ }
 
-    const speed=
-      character===player
-        ? player.speed*(running?1.55:1)
-        : character.speed;
+ // Player movement
+ const speed=7;
+ const moveX=joystick.x;
+ const moveZ=joystick.z;
+ player.position.x+=moveX*speed*dt;
+ player.position.z+=moveZ*speed*dt;
 
-    character.group.position.x+=dx*speed*dt;
-    character.group.position.z+=dz*speed*dt;
+ player.position.x=THREE.MathUtils.clamp(player.position.x,-35,35);
+ player.position.z=THREE.MathUtils.clamp(player.position.z,-19,19);
 
-    character.group.rotation.y=Math.atan2(dx,dz);
+ if(Math.abs(moveX)+Math.abs(moveZ)>0.1){
+  player.rotation.y=Math.atan2(moveX,moveZ);
+ }
 
-    const parts=character.group.userData.parts;
+ // Five AI survivors wander around and attack
+ for(const a of allies){
+  if(!a.alive)continue;
+  a.cooldown-=dt;
 
-    if(parts) {
-      const t=performance.now()*.012;
-      parts.legL.rotation.x=Math.sin(t)*.5;
-      parts.legR.rotation.x=-Math.sin(t)*.5;
-      parts.armL.rotation.x=-Math.sin(t)*.4;
-      parts.armR.rotation.x=Math.sin(t)*.4;
+  if(Math.hypot(a.targetX-a.mesh.position.x,
+  a.targetZ-a.mesh.position.z)<1.2){
+   a.targetX=Math.random()*50-25;
+   a.targetZ=Math.random()*25-12.5;
+  }
+
+  moveToward(a.mesh,
+  {x:a.targetX,z:a.targetZ},2.5,dt);
+
+  const d=a.mesh.position.distanceTo(demon.position);
+  if(d<17 && a.cooldown<=0){
+   shoot(a.mesh.position.clone().add(new THREE.Vector3(0,1.3,0)),
+   demon.position.clone().add(new THREE.Vector3(0,1.3,0)),
+   25+weaponLevel*10,'ally');
+   a.cooldown=1.3;
+  }
+ }
+
+ // Monster automatically levels up
+ const newMax=5000+Math.floor(elapsed/30)*500;
+ if(newMax>demonMaxHP){
+  const increase=newMax-demonMaxHP;
+  demonHP+=increase;
+  demonMaxHP=newMax;
+ }
+
+ const target=nearestTarget();
+ moveToward(demon,target.position,2.1+elapsed/180,dt);
+
+ // Monster attacks nearby survivor
+ if(demonAttack>=1.2 && demon.position.distanceTo(target)<2.3){
+  demonAttack=0;
+  if(target===player){
+   if(shield>0)shield-=1;
+   else playerHP-=12+Math.floor(elapsed/60)*2;
+  }else{
+   const a=allies.find(x=>x.mesh===target);
+   if(a){
+    a.hp-=18;
+    if(a.hp<=0){
+     a.alive=false;
+     scene.remove(a.mesh);
     }
+   }
+  }
+ }
+
+ // Player automatic weapon
+ if(fireHeld && lastShot>=0.35){
+  let nearest=null,dist=17;
+  const d=player.position.distanceTo(demon.position);
+  if(d<dist){nearest=demon;dist=d}
+  if(nearest){
+   lastShot=0;
+   const damage=25*Math.pow(1.6,weaponLevel-1);
+   shoot(player.position.clone().add(new THREE.Vector3(0,1.2,0)),
+   demon.position.clone().add(new THREE.Vector3(0,1.3,0)),
+   damage,'player');
+  }
+ }
+
+ // Bullets
+ for(let i=bullets.length-1;i>=0;i--){
+  const b=bullets[i];
+  b.mesh.position.addScaledVector(b.dir,b.speed*dt);
+  b.life-=dt;
+
+  if(b.owner!=='enemy' &&
+  b.mesh.position.distanceTo(demon.position)<1.8){
+   demonHP-=b.damage;
+   b.life=0;
   }
 
-  // Keep characters within the map
-  character.group.position.x=THREE.MathUtils.clamp(
-    character.group.position.x,-30,30
-  );
-
-  character.group.position.z=THREE.MathUtils.clamp(
-    character.group.position.z,-23,23
-  );
-}
-
-function keepInsideRoom(character) {
-  // Rooms are visually separated. This starter version
-  // keeps movement inside the overall map boundaries.
-}
-
-/* ---------- AUTOMATIC WEAPONS ---------- */
-
-function playerAutoFire(dt) {
-  if(!player.alive || !monster.alive) return;
-
-  player.fireTimer-=dt;
-
-  const nearest=monster.group.position.distanceTo(
-    player.group.position
-  );
-
-  if(firing && nearest<=player.range && player.fireTimer<=0) {
-    shoot(
-      player,monster,player.damage,0xffed64
-    );
-
-    player.fireTimer=.35;
+  if(b.life<=0){
+   scene.remove(b.mesh);
+   bullets.splice(i,1);
   }
+ }
+
+ if(demonHP<=0){
+  // Monster is defeated; it returns with greater health
+  demonHP=5000+Math.floor(elapsed/30)*500;
+  demonMaxHP=demonHP;
+  demon.position.set(Math.random()*40-20,0,
+  Math.random()<0.5?-14:14);
+ }
+
+ if(playerHP<=0)endGame(false);
+ if(timeLeft<=0)endGame(true);
 }
 
-function botAI(dt) {
-  bots.forEach((bot,i)=>{
-    if(!bot.alive || !monster.alive) return;
+function updateHUD(){
+ document.getElementById('coins').textContent=Math.floor(coins);
+ document.getElementById('health').textContent=Math.max(0,Math.floor(playerHP))+
+ (shield>0?' + SHIELD':'');
+ document.getElementById('monsterHealth').textContent=Math.max(0,Math.floor(demonHP));
+ document.getElementById('wl').textContent=weaponLevel;
+ document.getElementById('cl').textContent=computerLevel;
+ document.getElementById('survivors').textContent=
+ allies.filter(a=>a.alive).length+1;
 
-    const dx=monster.group.position.x-
-      bot.group.position.x;
-
-    const dz=monster.group.position.z-
-      bot.group.position.z;
-
-    const d=Math.hypot(dx,dz);
-
-    // Bots approach the monster and attack when close.
-    if(d>5) {
-      moveCharacter(bot,dx,dz,dt);
-    } else {
-      bot.fireTimer-=dt;
-
-      if(bot.fireTimer<=0) {
-        shoot(bot,monster,15,0xffb94d);
-        bot.fireTimer=1.0+Math.random()*.5;
-      }
-    }
-  });
+ const s=Math.max(0,Math.ceil(timeLeft));
+ document.getElementById('timer').textContent=
+ String(Math.floor(s/60)).padStart(2,'0')+':'+
+ String(s%60).padStart(2,'0');
 }
 
-function monsterAI(dt) {
-  if(!monster.alive) return;
+function animate(){
+ requestAnimationFrame(animate);
+ const dt=Math.min(clock.getDelta(),0.05);
 
-  const target=nearestTarget();
+ if(running){
+  update(dt);
+  updateHUD();
+ }
 
-  if(!target) return;
+ // Camera follows player from isometric angle
+ camera.position.set(
+ player.position.x+19,
+ player.position.y+27,
+ player.position.z+23
+ );
+ camera.lookAt(player.position.x,0,player.position.z);
 
-  const dx=target.group.position.x-
-    monster.group.position.x;
-
-  const dz=target.group.position.z-
-    monster.group.position.z;
-
-  const d=Math.hypot(dx,dz);
-
-  if(d>1.8) {
-    const speed=monster.speed;
-
-    monster.group.position.x+=dx/d*speed*dt;
-    monster.group.position.z+=dz/d*speed*dt;
-
-    monster.group.rotation.y=Math.atan2(dx,dz);
-  } else {
-    monster.attackTimer-=dt;
-
-    if(monster.attackTimer<=0) {
-      damageCharacter(target,monster.damage);
-
-      monster.attackTimer=.8;
-    }
-  }
-
-  // Simple monster animation
-  monster.group.position.y=
-    Math.abs(Math.sin(performance.now()*.006))*.08;
+ renderer.render(scene,camera);
 }
 
-/* ---------- BULLET UPDATES ---------- */
-
-function updateBullets(dt) {
-  for(let i=bullets.length-1;i>=0;i--) {
-    const b=bullets[i];
-
-    b.mesh.position.addScaledVector(
-      b.dir,18*dt
-    );
-
-    b.life-=dt;
-
-    let hit=false;
-
-    if(b.target.alive) {
-      const p=b.target.group.position.clone();
-      p.y+=1.3;
-
-      if(b.mesh.position.distanceTo(p)<1.1) {
-        if(b.target===monster) {
-          damageMonster(b.damage);
-        } else {
-          damageCharacter(b.target,b.damage);
-        }
-
-        hit=true;
-      }
-    }
-
-    if(hit || b.life<=0) {
-      scene.remove(b.mesh);
-      b.mesh.geometry.dispose();
-      b.mesh.material.dispose();
-      bullets.splice(i,1);
-    }
-  }
-}
-
-/* ---------- CAMERA ---------- */
-
-const cameraOffset=new THREE.Vector3(0,8,11);
-
-function updateCamera(dt) {
-  const p=player.group.position;
-
-  const target=new THREE.Vector3(
-    p.x+cameraOffset.x,
-    p.y+cameraOffset.y,
-    p.z+cameraOffset.z
-  );
-
-  camera.position.lerp(target,Math.min(1,dt*4));
-
-  camera.lookAt(
-    p.x,
-    p.y+1.1,
-    p.z
-  );
-}
-
-/* ---------- SURVIVAL GAME LOOP ---------- */
-
-function finishGame(won) {
-  if(ended) return;
-
-  ended=true;
-
-  const el=$("message");
-
-  el.style.display="block";
-  el.innerHTML=won
-    ? "🏆 YOU SURVIVE THE DEMAN!<br><br><button onclick='location.reload()'>PLAY AGAIN</button>"
-    : "💀 YOU DIED!<br><br><button onclick='location.reload()'>TRY AGAIN</button>";
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  const dt=Math.min(clock.getDelta(),.05);
-
-  if(!started || ended) {
-    renderer.render(scene,camera);
-    return;
-  }
-
-  elapsed+=dt;
-  gameTime-=dt;
-
-  if(gameTime<=0) {
-    gameTime=0;
-    finishGame(true);
-  }
-
-  // Each computer generates coins independently.
-  rooms.forEach(r=>{
-    coins+=r.income*dt;
-  });
-
-  // Selected room follows the nearest room.
-  selectedRoom=nearestRoom();
-
-  // Player movement from joystick or keyboard.
-  let dx=joyX;
-  let dz=joyY;
-
-  if(keys["w"] || keys["arrowup"]) dz=-1;
-  if(keys["s"] || keys["arrowdown"]) dz=1;
-  if(keys["a"] || keys["arrowleft"]) dx=-1;
-  if(keys["d"] || keys["arrowright"]) dx=1;
-
-  moveCharacter(player,dx,dz,dt);
-
-  // Characters automatically fight the monster.
-  botAI(dt);
-  monsterAI(dt);
-  playerAutoFire(dt);
-  updateBullets(dt);
-
-  // Monster becomes stronger over time.
-  monsterLevelTimer+=dt;
-
-  if(monsterLevelTimer>=30 && monster.alive) {
-    monsterLevelTimer=0;
-    monster.level++;
-
-    monster.speed=Math.min(
-      monster.speed+.2,4.5
-    );
-
-    monster.damage+=10;
-
-    // Increase maximum HP as monster levels up.
-    monster.maxHp+=500;
-    monster.hp+=500;
-
-    showMessage(
-      "MONSTER LEVEL UP! LEVEL "+monster.level
-    );
-  }
-
-  // Message disappears automatically.
-  if(messageTimer>0) {
-    messageTimer-=dt;
-
-    if(messageTimer<=0 && !ended) {
-      $("message").style.display="none";
-    }
-  }
-
-  // HUD updates several times per second.
-  hudTimer+=dt;
-
-  if(hudTimer>.15) {
-    hudTimer=0;
-
-    const minutes=Math.floor(gameTime/60);
-    const seconds=Math.floor(gameTime%60);
-
-    $("timer").textContent=
-      String(minutes).padStart(2,"0")+":"+
-      String(seconds).padStart(2,"0");
-
-    updateHUD();
-  }
-
-  updateCamera(dt);
-  renderer.render(scene,camera);
-}
-
-/* ---------- RESIZE ---------- */
-
-addEventListener("resize",()=>{
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(innerWidth,innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.35));
+window.addEventListener('resize',()=>{
+ camera.aspect=innerWidth/innerHeight;
+ camera.updateProjectionMatrix();
+ renderer.setSize(innerWidth,innerHeight);
 });
 
-/* ---------- INITIAL POSITION ---------- */
-
-camera.position.set(-15,10,14);
-camera.lookAt(0,0,0);
-
-updateHUD();
 animate();
-
 </script>
 </body>
-  </html>
+                                    </html>
